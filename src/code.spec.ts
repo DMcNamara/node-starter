@@ -1,9 +1,14 @@
-import { code } from './code';
+import { code } from "./code";
 
 describe("code", () => {
-  it("should print 'Hello, world!'", () => {
+  it.each([
+    ["Gandalf", 9001],
+    ["Bilbo", 111],
+  ])("should print 'Hello, %s!'", (name, age) => {
     console.log = jest.fn();
-    code("Gandalf", 9001);
-    expect(console.log).toHaveBeenCalledWith("Hello, Gandalf! You are 9001 years old.");
+    code(name, age);
+    expect(console.log).toHaveBeenCalledWith(
+      `Hello, ${name}! You are ${age} years old.`,
+    );
   });
 });
