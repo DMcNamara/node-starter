@@ -2,11 +2,13 @@
   "name": "node-starter",
   "version": "1.0.0",
   "description": "A starter template for Node.js typescript scripts.",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "build": "tsc",
+    "start": "npm run build && node dist/index.js",
+    "pretest": "tsc -p tsconfig.test.json",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "concurrently -n tsc,jest -k \"tsc -p tsconfig.test.json --watch --preserveWatchOutput\" \"jest --watchAll\""
   },
   "keywords": [],
   "author": "",
@@ -14,11 +16,10 @@
   "type": "commonjs",
   "devDependencies": {
     "@types/jest": "^30.0.0",
-    "@types/node": "^24.0.0",
-    "jest": "^30.2.0",
-    "prettier": "^3.8.1",
-    "ts-jest": "^29.4.6",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+    "@types/node": "^24.13.4",
+    "concurrently": "^10.0.5",
+    "jest": "^30.5.1",
+    "prettier": "^3.9.6",
+    "typescript": "^7.0.2"
   }
 }
