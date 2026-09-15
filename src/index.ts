@@ -1,4 +1,8 @@
+import { parseArgs } from "node:util";
 import { code } from "./code";
 
-const args = process.argv.slice(2);
-code(args[0], Number(args[1]));
+const {
+  positionals: [name, age],
+} = parseArgs({ allowPositionals: true });
+
+code(name, Number(age));
